@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fisheye - photographe</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header>
+      <a href="/">
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home" />
+      </a>
+    </header>
+
+    <main id="main">
+      <div class="photograph-header"></div>
+    </main>
+
+    <div id="lightbox" class="lightbox hidden">
+      <button class="lightbox-close">&times;</button>
+      <button class="lightbox-prev">&#10094;</button>
+      <img class="lightbox-image" src="" alt="" />
+      <video class="lightbox-video" controls class="hidden"></video>
+      <p class="lightbox-title"></p>
+      <button class="lightbox-next">&#10095;</button>
+    </div>
+
+    <div id="contact_modal">
+      <div class="modal">
+        <header>
+          <h2>Contactez-moi</h2>
+          <img
+            src="assets/icons/close.svg"
+            onclick="closeModal()"
+            alt="Fermer le formulaire"
+          />
+        </header>
+        <form>
+          <div>
+            <label for="prenom">Prénom</label>
+            <input id="prenom" />
+          </div>
+          <button class="contact_button" type="submit">Envoyer</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="/scripts/pages/lightbox.js"></script>
+    <script src="/scripts/pages/photographer.js" type="module"></script>
+    <script src="/scripts/utils/contactForm.js"></script>
+  </body>
+</html>
