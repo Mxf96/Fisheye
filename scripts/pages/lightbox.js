@@ -23,7 +23,9 @@ function openLightbox(index, medias, folder) {
   currentIndex = index;
 
   const media = medias[index];
-  const src = `assets/photographers/Sample Photos/${folder}/${media.image || media.video}`;
+  const src = `assets/photographers/Sample Photos/${folder}/${
+    media.image || media.video
+  }`;
   const isImage = !!media.image;
 
   img.classList.toggle("hidden", !isImage);
@@ -46,14 +48,29 @@ function closeLightbox() {
 
 function showNextMedia() {
   currentIndex = (currentIndex + 1) % currentMediaList.length;
-  openLightbox(currentIndex, currentMediaList, getSampleFolderName(currentMediaList[currentIndex].photographerId));
+  openLightbox(
+    currentIndex,
+    currentMediaList,
+    getSampleFolderName(currentMediaList[currentIndex].photographerId)
+  );
 }
 
 function showPreviousMedia() {
-  currentIndex = (currentIndex - 1 + currentMediaList.length) % currentMediaList.length;
-  openLightbox(currentIndex, currentMediaList, getSampleFolderName(currentMediaList[currentIndex].photographerId));
+  currentIndex =
+    (currentIndex - 1 + currentMediaList.length) % currentMediaList.length;
+  openLightbox(
+    currentIndex,
+    currentMediaList,
+    getSampleFolderName(currentMediaList[currentIndex].photographerId)
+  );
 }
 
-document.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
-document.querySelector(".lightbox-next").addEventListener("click", showNextMedia);
-document.querySelector(".lightbox-prev").addEventListener("click", showPreviousMedia);
+document
+  .querySelector(".lightbox-close")
+  .addEventListener("click", closeLightbox);
+document
+  .querySelector(".lightbox-next")
+  .addEventListener("click", showNextMedia);
+document
+  .querySelector(".lightbox-prev")
+  .addEventListener("click", showPreviousMedia);

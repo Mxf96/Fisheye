@@ -72,21 +72,37 @@ function displayMedia(mediasToDisplay, folder) {
     likeCount.classList.add("like-count");
     likeCount.textContent = media.likes || 0;
 
-    const heartIcon = document.createElement("span");
+    const heartIcon = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    heartIcon.setAttribute("width", "24");
+    heartIcon.setAttribute("height", "24");
+    heartIcon.setAttribute("viewBox", "0 0 24 24");
     heartIcon.classList.add("heart-icon");
-    heartIcon.textContent = "♡"; // reste le même, on utilise le CSS pour "remplir"
 
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute(
+      "d",
+      "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 " +
+        "2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09 " +
+        "1.09-1.28 2.76-2.09 4.5-2.09 3.08 0 5.5 2.42 5.5 5.5 " +
+        "0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+    );
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "#901c1c");
+    path.setAttribute("stroke-width", "2");
+
+    heartIcon.appendChild(path);
+
+    // Gère le like
     heartIcon.addEventListener("click", () => {
-      const liked = heartIcon.classList.toggle("liked");
+      const liked = path.classList.toggle("liked");
       let count = parseInt(likeCount.textContent);
+      likeCount.textContent = liked ? count + 1 : count - 1;
 
-      if (liked) {
-        likeCount.textContent = count + 1;
-        heartIcon.textContent = "❤"; // Rempli visuellement
-      } else {
-        likeCount.textContent = count - 1;
-        heartIcon.textContent = "♡"; // Vide
-      }
+      // toggle remplissage
+      path.setAttribute("fill", liked ? "#901c1c" : "none");
     });
 
     likeContainer.appendChild(likeCount);
