@@ -122,8 +122,8 @@ form input {
 .media-section {
   display: flex;
   flex-wrap: wrap;
-  gap: 90px;
-  margin: 40px 100px;
+  gap: 20px 90px;
+  margin: 100px;
   justify-content: center;
 }
 
@@ -179,9 +179,11 @@ form input {
 
 .lightbox img,
 .lightbox video {
-  max-width: 90%;
-  max-height: 80%;
+  width: 1000px;
+  height: auto;
+  max-height: 90vh;
   border-radius: 10px;
+  
 }
 
 .lightbox p.lightbox-title {
@@ -190,7 +192,7 @@ form input {
   font-size: 18px;
   font-family: "DM Sans", sans-serif;
   align-self: flex-start;
-  margin-left: 25%;
+  margin-left: 15%;
 }
 
 .lightbox button {
