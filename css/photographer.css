@@ -3,8 +3,8 @@
 }
 
 .photograph-header {
-  background-color: #fafafa;
-  margin: 0 100px;
+  background: #fafafa;
+  margin: 0 100px 20px 100px;
   padding: 3rem;
   display: flex;
   justify-content: space-between;
@@ -54,20 +54,20 @@
   width: 170px;
   height: 70px;
   border: none;
-  background-color: #901c1c;
+  background: #901c1c;
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .contact_button:hover {
-  background: #DB8876;
+  background: #db8876;
   color: #000;
 }
 
 .modal {
   border-radius: 5px;
-  background-color: #db8876;
+  background: #db8876;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -133,7 +133,7 @@ form input {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  background-color: white;
+  background: white;
 }
 
 .media-card img,
@@ -158,12 +158,12 @@ form input {
   width: 100%;
   padding: 8px 2px;
   box-sizing: border-box;
-  background-color: white;
+  background: white;
 }
 
 .media-info .heart-icon {
   color: #901c1c;
-  font-size: 18px;  
+  font-size: 18px;
 }
 
 /* */
@@ -224,6 +224,89 @@ form input {
   transform: translateY(-50%);
 }
 
+.hidden {
+  display: none;
+}
+
+/**/
+
+/* Conteneur principal de la zone de tri */
+.sort-container {
+  margin: 20px 100px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Label "Trier par" */
+.sort-container label {
+  font-weight: bold;
+  color: #000;
+}
+
+/* Boîte du menu déroulant personnalisé */
+.custom-dropdown {
+  position: relative;
+  width: 140px;
+}
+
+/* Bouton affichant l'option sélectionnée */
+.selected-option {
+  width: 100%;
+  background-color: #901c1c;
+  color: white;
+  padding: 10px 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: left;
+  border-radius: 5px 5px 0 0;
+}
+
+/* Liste déroulante des options */
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: #901c1c;
+  border-radius: 0 0 5px 5px;
+  z-index: 1000;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Élément d’option */
+.options li {
+  padding: 10px 12px;
+  color: white;
+  cursor: pointer;
+  font-weight: normal;
+  border-top: 1px solid #fff;
+}
+
+/* Première option sans bord */
+.options li:first-child {
+  border-top: none;
+}
+
+/* Hover sur les options */
+.options li:hover {
+  background-color: #6d1414;
+}
+
+/* Option sélectionnée */
+.options li.active {
+  font-weight: bold;
+  display: none;
+}
+
+/* Classe pour masquer les éléments */
 .hidden {
   display: none;
 }
