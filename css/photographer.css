@@ -161,11 +161,6 @@ form input {
   background: white;
 }
 
-.media-info .heart-icon {
-  color: #901c1c;
-  font-size: 18px;
-}
-
 /* */
 
 .lightbox {
@@ -311,22 +306,29 @@ form input {
   display: none;
 }
 
-
 /**/
 
 .like-container {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 18px;
+  font-size: 20px;
   color: #901c1c;
 }
 
 .heart-icon {
+  font-size: 24px;
   cursor: pointer;
-  transition: color 0.2s;
+  color: #901c1c;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.heart-icon:hover {
+  transform: scale(1.1);
 }
 
 .heart-icon.liked {
-  color: #901c1c;
+  font-weight: bold;
+  filter: drop-shadow(0 0 1px #901c1c);
+  font-size: 15px;
 }

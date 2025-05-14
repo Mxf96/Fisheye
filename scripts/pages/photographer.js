@@ -74,13 +74,19 @@ function displayMedia(mediasToDisplay, folder) {
 
     const heartIcon = document.createElement("span");
     heartIcon.classList.add("heart-icon");
-    heartIcon.textContent = "♡";
+    heartIcon.textContent = "♡"; // reste le même, on utilise le CSS pour "remplir"
 
     heartIcon.addEventListener("click", () => {
       const liked = heartIcon.classList.toggle("liked");
       let count = parseInt(likeCount.textContent);
-      likeCount.textContent = liked ? count + 1 : count - 1;
-      heartIcon.textContent = liked ? "❤" : "♡";
+
+      if (liked) {
+        likeCount.textContent = count + 1;
+        heartIcon.textContent = "❤"; // Rempli visuellement
+      } else {
+        likeCount.textContent = count - 1;
+        heartIcon.textContent = "♡"; // Vide
+      }
     });
 
     likeContainer.appendChild(likeCount);
