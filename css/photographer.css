@@ -122,7 +122,7 @@ form input {
 .media-section {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 90px;
   margin: 40px 100px;
   justify-content: center;
 }
