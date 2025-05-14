@@ -310,3 +310,23 @@ form input {
 .hidden {
   display: none;
 }
+
+
+/**/
+
+.like-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 18px;
+  color: #901c1c;
+}
+
+.heart-icon {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.heart-icon.liked {
+  color: #901c1c;
+}

@@ -65,12 +65,29 @@ function displayMedia(mediasToDisplay, folder) {
     const title = document.createElement("p");
     title.textContent = media.title || "Sans titre";
 
+    const likeContainer = document.createElement("div");
+    likeContainer.classList.add("like-container");
+
+    const likeCount = document.createElement("span");
+    likeCount.classList.add("like-count");
+    likeCount.textContent = media.likes || 0;
+
     const heartIcon = document.createElement("span");
     heartIcon.classList.add("heart-icon");
-    heartIcon.textContent = "❤";
+    heartIcon.textContent = "♡";
+
+    heartIcon.addEventListener("click", () => {
+      const liked = heartIcon.classList.toggle("liked");
+      let count = parseInt(likeCount.textContent);
+      likeCount.textContent = liked ? count + 1 : count - 1;
+      heartIcon.textContent = liked ? "❤" : "♡";
+    });
+
+    likeContainer.appendChild(likeCount);
+    likeContainer.appendChild(heartIcon);
 
     infoContainer.appendChild(title);
-    infoContainer.appendChild(heartIcon);
+    infoContainer.appendChild(likeContainer);
     mediaContainer.appendChild(infoContainer);
     section.appendChild(mediaContainer);
   }
