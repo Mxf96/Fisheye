@@ -44,10 +44,10 @@
       <button class="lightbox-next">&#10095;</button>
     </div>
 
-    <div id="contact_modal">
+    <div id="contact_modal" class="hidden">
       <div class="modal">
         <header>
-          <h2>Contactez-moi</h2>
+          <h2>Contactez-moi<br /><span></span></h2>
           <img
             src="assets/icons/close.svg"
             onclick="closeModal()"
@@ -57,7 +57,19 @@
         <form>
           <div>
             <label for="prenom">Prénom</label>
-            <input id="prenom" />
+            <input id="prenom" type="text" required />
+          </div>
+          <div>
+            <label for="nom">Nom</label>
+            <input id="nom" type="text" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" required />
+          </div>
+          <div>
+            <label for="message">Votre message</label>
+            <textarea id="message" rows="5" required></textarea>
           </div>
           <button class="contact_button" type="submit">Envoyer</button>
         </form>
