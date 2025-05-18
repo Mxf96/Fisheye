@@ -1,4 +1,6 @@
 import { createPhotographerHeader } from "../templates/photographer.js";
+import { openLightbox } from "./lightbox.js";
+// import { displayModal }  from '../utils/contactForm.js';
 
 // Variables globales
 let medias = [];

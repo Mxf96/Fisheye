@@ -13,7 +13,7 @@ function getSampleFolderName(id) {
   return folders[id];
 }
 
-function openLightbox(index, medias, folder) {
+export function openLightbox(index, medias, folder) {
   const lightbox = document.getElementById("lightbox");
   const img = lightbox.querySelector(".lightbox-image");
   const video = lightbox.querySelector(".lightbox-video");

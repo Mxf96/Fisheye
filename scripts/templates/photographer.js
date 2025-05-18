@@ -1,3 +1,5 @@
+import { displayModal } from "../utils/contactForm.js";
+
 export function photographerTemplate(data) {
   const { name, portrait, city, country, tagline, price, id } = data;
   const picture = `assets/photographers/Sample Photos/Photographers ID Photos/${portrait}`;
