@@ -87,7 +87,7 @@
   background: #db8876;
   width: 50%;
   padding: 35px;
-  margin: 40px auto;
+  margin: 10px auto;
 }
 
 .modal header {
@@ -136,7 +136,7 @@ form div {
 
 .modal form textarea {
   resize: vertical;
-  min-height: 100px;
+  max-height: 50px;
 }
 
 .media-section {
@@ -180,6 +180,12 @@ form div {
   box-sizing: border-box;
   background: #fff;
 }
+
+.media-wrapper {
+  all: unset;
+  cursor: pointer;
+}
+
 
 /* */
 

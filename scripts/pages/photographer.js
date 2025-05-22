@@ -1,4 +1,3 @@
-// ./scripts/pages/photographer.js
 import { createPhotographerHeader } from "../templates/photographer.js";
 import { openLightbox } from "./lightbox.js";
 
@@ -36,8 +35,10 @@ function updateTotalLikesDisplay() {
 }
 
 function displayStatsBox(totalLikes, price) {
-  const statsBox = document.createElement("div");
+  const statsBox = document.createElement("aside");
   statsBox.classList.add("stats-box");
+  statsBox.setAttribute("role", "complementary");
+  statsBox.setAttribute("aria-label", "Statistiques du photographe");
 
   const likesContainer = document.createElement("div");
   likesContainer.classList.add("likes-container");
@@ -46,7 +47,6 @@ function displayStatsBox(totalLikes, price) {
   likesCount.classList.add("total-likes");
   likesCount.textContent = totalLikes;
 
-  // Crée le cœur en SVG
   const heartIcon = document.createElementNS(
     "http://www.w3.org/2000/svg",
     "svg"
@@ -55,6 +55,7 @@ function displayStatsBox(totalLikes, price) {
   heartIcon.setAttribute("height", "24");
   heartIcon.setAttribute("viewBox", "0 0 24 24");
   heartIcon.classList.add("heart-icon");
+  heartIcon.setAttribute("aria-hidden", "true");
 
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
   path.setAttribute(
@@ -83,29 +84,39 @@ function displayStatsBox(totalLikes, price) {
 function displayMedia(mediasToDisplay, folder) {
   const section = document.createElement("section");
   section.classList.add("media-section");
+  section.setAttribute("aria-label", "Médias du photographe");
 
   for (let index = 0; index < mediasToDisplay.length; index++) {
     const media = mediasToDisplay[index];
     totalLikes += media.likes;
-    const mediaContainer = document.createElement("div");
+    const mediaContainer = document.createElement("article");
     mediaContainer.classList.add("media-card");
+
+    const mediaWrapper = document.createElement("button");
+    mediaWrapper.classList.add("media-wrapper");
+    mediaWrapper.setAttribute("aria-label", media.title);
+    mediaWrapper.setAttribute("tabindex", "0");
+    mediaWrapper.addEventListener("click", () =>
+      openLightbox(index, mediasToDisplay, folder)
+    );
+    mediaWrapper.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openLightbox(index, mediasToDisplay, folder);
+      }
+    });
 
     if (media.image) {
       const img = document.createElement("img");
       img.src = `assets/photographers/Sample Photos/${folder}/${media.image}`;
-      img.alt = media.title || "";
-      img.addEventListener("click", () =>
-        openLightbox(index, mediasToDisplay, folder)
-      );
-      mediaContainer.appendChild(img);
+      img.alt = media.title;
+      mediaWrapper.appendChild(img);
     } else if (media.video) {
       const video = document.createElement("video");
       video.src = `assets/photographers/Sample Photos/${folder}/${media.video}`;
+      video.setAttribute("aria-label", media.title);
       video.controls = true;
-      video.addEventListener("click", () =>
-        openLightbox(index, mediasToDisplay, folder)
-      );
-      mediaContainer.appendChild(video);
+      mediaWrapper.appendChild(video);
     }
 
     const infoContainer = document.createElement("div");
@@ -120,6 +131,7 @@ function displayMedia(mediasToDisplay, folder) {
     const likeCount = document.createElement("span");
     likeCount.classList.add("like-count");
     likeCount.textContent = media.likes || 0;
+    likeCount.setAttribute("aria-label", `${media.likes} mentions j'aime`);
 
     const heartIcon = document.createElementNS(
       "http://www.w3.org/2000/svg",
@@ -129,6 +141,10 @@ function displayMedia(mediasToDisplay, folder) {
     heartIcon.setAttribute("height", "24");
     heartIcon.setAttribute("viewBox", "0 0 24 24");
     heartIcon.classList.add("heart-icon");
+    heartIcon.setAttribute("role", "button");
+    heartIcon.setAttribute("tabindex", "0");
+    heartIcon.setAttribute("aria-pressed", "false");
+    heartIcon.setAttribute("aria-label", "Aimer ce média");
 
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path.setAttribute(
@@ -144,13 +160,22 @@ function displayMedia(mediasToDisplay, folder) {
 
     heartIcon.appendChild(path);
 
-    heartIcon.addEventListener("click", () => {
+    function toggleLike() {
       const liked = path.classList.toggle("liked");
+      heartIcon.setAttribute("aria-pressed", liked ? "true" : "false");
       let count = parseInt(likeCount.textContent);
       likeCount.textContent = liked ? count + 1 : count - 1;
       totalLikes += liked ? 1 : -1;
       updateTotalLikesDisplay();
       path.setAttribute("fill", liked ? "#901c1c" : "none");
+    }
+
+    heartIcon.addEventListener("click", toggleLike);
+    heartIcon.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggleLike();
+      }
     });
 
     likeContainer.appendChild(likeCount);
@@ -158,6 +183,7 @@ function displayMedia(mediasToDisplay, folder) {
 
     infoContainer.appendChild(title);
     infoContainer.appendChild(likeContainer);
+    mediaContainer.appendChild(mediaWrapper);
     mediaContainer.appendChild(infoContainer);
     section.appendChild(mediaContainer);
   }

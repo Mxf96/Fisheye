@@ -33,17 +33,26 @@ export function openLightbox(index, medias, folder) {
 
   if (isImage) {
     img.src = src;
-    img.alt = media.title || "";
+    img.alt = media.title || "Média sans titre";
+    img.setAttribute("tabindex", "0");
   } else {
     video.src = src;
+    video.setAttribute("aria-label", media.title || "Vidéo sans titre");
   }
 
   title.textContent = media.title || "";
   lightbox.classList.remove("hidden");
+  lightbox.setAttribute("aria-hidden", "false");
+  lightbox.setAttribute("role", "dialog");
+  lightbox.setAttribute("aria-label", "Visionneuse de média agrandi");
+  document.body.style.overflow = "hidden"; // Empêche le scroll derrière la lightbox
 }
 
 function closeLightbox() {
-  document.getElementById("lightbox").classList.add("hidden");
+  const lightbox = document.getElementById("lightbox");
+  lightbox.classList.add("hidden");
+  lightbox.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "auto";
 }
 
 function showNextMedia() {
@@ -65,12 +74,36 @@ function showPreviousMedia() {
   );
 }
 
-document
-  .querySelector(".lightbox-close")
-  .addEventListener("click", closeLightbox);
-document
-  .querySelector(".lightbox-next")
-  .addEventListener("click", showNextMedia);
-document
-  .querySelector(".lightbox-prev")
-  .addEventListener("click", showPreviousMedia);
+// Boutons accessibles à la souris
+const closeBtn = document.querySelector(".lightbox-close");
+const nextBtn = document.querySelector(".lightbox-next");
+const prevBtn = document.querySelector(".lightbox-prev");
+
+closeBtn.setAttribute("role", "button");
+closeBtn.setAttribute("aria-label", "Fermer la visionneuse");
+nextBtn.setAttribute("role", "button");
+nextBtn.setAttribute("aria-label", "Photo suivante");
+prevBtn.setAttribute("role", "button");
+prevBtn.setAttribute("aria-label", "Photo précédente");
+
+closeBtn.addEventListener("click", closeLightbox);
+nextBtn.addEventListener("click", showNextMedia);
+prevBtn.addEventListener("click", showPreviousMedia);
+
+// Navigation clavier globale (flèches et Échap)
+document.addEventListener("keydown", (e) => {
+  const lightbox = document.getElementById("lightbox");
+  if (lightbox.classList.contains("hidden")) return;
+
+  switch (e.key) {
+    case "ArrowRight":
+      showNextMedia();
+      break;
+    case "ArrowLeft":
+      showPreviousMedia();
+      break;
+    case "Escape":
+      closeLightbox();
+      break;
+  }
+});
