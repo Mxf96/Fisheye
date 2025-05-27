@@ -22,10 +22,12 @@
 
       <div class="sort-container">
         <label for="sort-toggle">Trier par</label>
+
         <div class="custom-dropdown">
           <button id="sort-toggle" class="selected-option">
             Popularité <span class="arrow">▾</span>
           </button>
+
           <ul id="sort-options" class="options hidden">
             <li data-value="popularity" class="active">Popularité</li>
             <li data-value="date">Date</li>
@@ -54,30 +56,33 @@
             alt="Fermer le formulaire"
           />
         </header>
+
         <form>
           <div>
             <label for="prenom">Prénom</label>
             <input id="prenom" type="text" required />
           </div>
+
           <div>
             <label for="nom">Nom</label>
             <input id="nom" type="text" required />
           </div>
+
           <div>
             <label for="email">Email</label>
             <input id="email" type="email" required />
           </div>
+
           <div>
             <label for="message">Votre message</label>
             <textarea id="message" rows="5" required></textarea>
           </div>
+
           <button class="contact_button" type="submit">Envoyer</button>
         </form>
       </div>
     </div>
 
     <script src="./scripts/pages/photographer.js" type="module"></script>
-    <!-- <script src="./scripts/pages/lightbox.js"></script>
-    <script src="./scripts/utils/contactForm.js"></script> -->
   </body>
 </html>

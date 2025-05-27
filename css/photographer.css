@@ -1,3 +1,4 @@
+/* Contact Modal */
 #contact_modal {
   position: fixed;
   top: 0;
@@ -12,6 +13,7 @@
   display: none;
 }
 
+/* Photograph Header */
 .photograph-header {
   background: #fafafa;
   margin: 0 100px 20px 100px;
@@ -56,6 +58,7 @@
   border-radius: 50%;
 }
 
+/* Contact Button */
 .contact_button {
   align-self: flex-start;
   padding: 20px 40px;
@@ -71,17 +74,7 @@
   background: #6d1414;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/*  Modal (Form) */
 .modal {
   border-radius: 5px;
   background: #db8876;
@@ -139,6 +132,7 @@ form div {
   max-height: 50px;
 }
 
+/* Media Section */
 .media-section {
   display: flex;
   flex-wrap: wrap;
@@ -186,9 +180,7 @@ form div {
   cursor: pointer;
 }
 
-
-/* */
-
+/* Lightbox */
 .lightbox {
   position: fixed;
   top: 0;
@@ -246,13 +238,7 @@ form div {
   transform: translateY(-50%);
 }
 
-.hidden {
-  display: none;
-}
-
-/**/
-
-/* Conteneur principal de la zone de tri */
+/* Sort / Dropdown */
 .sort-container {
   margin: 20px 100px;
   font-family: "DM Sans", sans-serif;
@@ -262,19 +248,16 @@ form div {
   gap: 15px;
 }
 
-/* Label "Trier par" */
 .sort-container label {
   font-weight: bold;
   color: #000;
 }
 
-/* Boîte du menu déroulant personnalisé */
 .custom-dropdown {
   position: relative;
   width: 140px;
 }
 
-/* Bouton affichant l'option sélectionnée */
 .selected-option {
   width: 100%;
   background: #901c1c;
@@ -288,7 +271,6 @@ form div {
   border-radius: 5px 5px 0 0;
 }
 
-/* Liste déroulante des options */
 .options {
   position: absolute;
   top: 100%;
@@ -303,7 +285,6 @@ form div {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Élément d’option */
 .options li {
   padding: 10px 12px;
   color: #fff;
@@ -312,29 +293,20 @@ form div {
   border-top: 1px solid #fff;
 }
 
-/* Première option sans bord */
 .options li:first-child {
   border-top: none;
 }
 
-/* Hover sur les options */
 .options li:hover {
   background: #6d1414;
 }
 
-/* Option sélectionnée */
 .options li.active {
   font-weight: bold;
   display: none;
 }
 
-/* Classe pour masquer les éléments */
-.hidden {
-  display: none;
-}
-
-/**/
-
+/* Likes / Coeurs */
 .heart-icon {
   width: 24px;
   height: 24px;
@@ -347,6 +319,12 @@ form div {
   transform: scale(1.1);
 }
 
+.heart-icon.liked {
+  font-weight: bold;
+  filter: drop-shadow(0 0 1px #901c1c);
+  font-size: 20px;
+}
+
 .like-container {
   display: flex;
   align-items: center;
@@ -355,13 +333,7 @@ form div {
   color: #901c1c;
 }
 
-.heart-icon.liked {
-  font-weight: bold;
-  filter: drop-shadow(0 0 1px #901c1c);
-  font-size: 20px;
-}
-
-/**/
+/* Stats Box (likes + prix) */
 .stats-box {
   position: fixed;
   bottom: 0;
@@ -390,4 +362,20 @@ form div {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+/* Généralités */
+.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

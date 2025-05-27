@@ -1,20 +1,24 @@
 import { createPhotographerHeader } from "../templates/photographer.js";
 import { openLightbox } from "./lightbox.js";
 
+// Déclaration des variables globales
 let medias = [];
 let folder = "";
 let totalLikes = 0;
 
+// Récupère les données du fichier JSON
 async function getData() {
   const response = await fetch("./data/photographers.json");
   return await response.json();
 }
 
+// Extrait l'identifiant du photographe depuis l'URL
 function getPhotographerIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return parseInt(params.get("id"), 10);
 }
 
+// Associe un ID de photographe à un nom de dossier
 function getSampleFolderName(id) {
   const folders = {
     243: "Mimi",
@@ -27,6 +31,7 @@ function getSampleFolderName(id) {
   return folders[id];
 }
 
+// Met à jour l'affichage du nombre total de likes
 function updateTotalLikesDisplay() {
   const totalLikesElement = document.querySelector(".stats-box .total-likes");
   if (totalLikesElement) {
@@ -34,6 +39,7 @@ function updateTotalLikesDisplay() {
   }
 }
 
+// Crée et affiche la boîte de statistiques (likes + prix)
 function displayStatsBox(totalLikes, price) {
   const statsBox = document.createElement("aside");
   statsBox.classList.add("stats-box");
@@ -47,6 +53,7 @@ function displayStatsBox(totalLikes, price) {
   likesCount.classList.add("total-likes");
   likesCount.textContent = totalLikes;
 
+  // Création de l'icône cœur en SVG
   const heartIcon = document.createElementNS(
     "http://www.w3.org/2000/svg",
     "svg"
@@ -81,11 +88,13 @@ function displayStatsBox(totalLikes, price) {
   document.body.appendChild(statsBox);
 }
 
+// Affiche les médias du photographe
 function displayMedia(mediasToDisplay, folder) {
   const section = document.createElement("section");
   section.classList.add("media-section");
   section.setAttribute("aria-label", "Médias du photographe");
 
+  // Pour chaque média du photographe
   for (let index = 0; index < mediasToDisplay.length; index++) {
     const media = mediasToDisplay[index];
     totalLikes += media.likes;
@@ -96,6 +105,8 @@ function displayMedia(mediasToDisplay, folder) {
     mediaWrapper.classList.add("media-wrapper");
     mediaWrapper.setAttribute("aria-label", media.title);
     mediaWrapper.setAttribute("tabindex", "0");
+
+    // Gère l'ouverture de la lightbox au clic ou touche clavier
     mediaWrapper.addEventListener("click", () =>
       openLightbox(index, mediasToDisplay, folder)
     );
@@ -106,6 +117,7 @@ function displayMedia(mediasToDisplay, folder) {
       }
     });
 
+    // Affiche l'image ou la vidéo selon le média
     if (media.image) {
       const img = document.createElement("img");
       img.src = `assets/photographers/Sample Photos/${folder}/${media.image}`;
@@ -133,6 +145,7 @@ function displayMedia(mediasToDisplay, folder) {
     likeCount.textContent = media.likes || 0;
     likeCount.setAttribute("aria-label", `${media.likes} mentions j'aime`);
 
+    // Création de l'icône cœur interactif
     const heartIcon = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "svg"
@@ -160,6 +173,7 @@ function displayMedia(mediasToDisplay, folder) {
 
     heartIcon.appendChild(path);
 
+    // Fonction de toggle du like
     function toggleLike() {
       const liked = path.classList.toggle("liked");
       heartIcon.setAttribute("aria-pressed", liked ? "true" : "false");
@@ -170,6 +184,7 @@ function displayMedia(mediasToDisplay, folder) {
       path.setAttribute("fill", liked ? "#901c1c" : "none");
     }
 
+    // Ajout des événements de like
     heartIcon.addEventListener("click", toggleLike);
     heartIcon.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
@@ -191,6 +206,7 @@ function displayMedia(mediasToDisplay, folder) {
   document.getElementById("main").appendChild(section);
 }
 
+// Initialise la page du photographe
 async function init() {
   const id = getPhotographerIdFromUrl();
   const data = await getData();
@@ -209,20 +225,23 @@ async function init() {
   }
 }
 
-init();
+init(); // Lance l'initialisation
 
 const sortToggle = document.getElementById("sort-toggle");
 const sortOptions = document.getElementById("sort-options");
 
+// Gère l'affichage du menu déroulant de tri
 sortToggle.addEventListener("click", () => {
   sortOptions.classList.toggle("hidden");
 });
 
+// Ajoute les événements pour chaque option de tri
 document.querySelectorAll("#sort-options li").forEach((item) => {
   item.addEventListener("click", (e) => {
     const selected = e.target;
     const sortBy = selected.dataset.value;
 
+    // Met à jour le bouton de tri avec l'option sélectionnée
     sortToggle.innerHTML = `${selected.textContent} <span class="arrow">▾</span>`;
     document
       .querySelectorAll("#sort-options li")
@@ -230,6 +249,7 @@ document.querySelectorAll("#sort-options li").forEach((item) => {
     selected.classList.add("active");
     sortOptions.classList.add("hidden");
 
+    // Trie les médias en fonction de l'option sélectionnée
     let sortedMedias = [...medias];
 
     if (sortBy === "popularity") {
@@ -240,6 +260,7 @@ document.querySelectorAll("#sort-options li").forEach((item) => {
       sortedMedias.sort((a, b) => a.title.localeCompare(b.title));
     }
 
+    // Rafraîchit l'affichage des médias avec le nouveau tri
     document.querySelector(".media-section")?.remove();
     totalLikes = 0;
     displayMedia(sortedMedias, folder);
