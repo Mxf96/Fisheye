@@ -91,7 +91,7 @@ export function createPhotographerHeader(photographer) {
   const button = document.createElement("button");
   button.classList.add("contact_button");
   button.textContent = "Contactez-moi";
-  button.onclick = () => displayModal?.(); // Utilise la fonction importée si disponible (appel sécurisé)
+  button.onclick = () => displayModal?.(); // Utilise la fonction importée si disponible (secure call)
 
   // Image du portrait du photographe
   const img = document.createElement("img");

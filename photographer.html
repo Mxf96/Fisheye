@@ -23,15 +23,22 @@
       <div class="sort-container">
         <label for="sort-toggle">Trier par</label>
 
-        <div class="custom-dropdown">
-          <button id="sort-toggle" class="selected-option">
+        <div class="custom-dropdown" role="listbox" aria-label="Menu de tri">
+          <button
+            id="sort-toggle"
+            class="selected-option"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+          >
             Popularité <span class="arrow">▾</span>
           </button>
 
-          <ul id="sort-options" class="options hidden">
-            <li data-value="popularity" class="active">Popularité</li>
-            <li data-value="date">Date</li>
-            <li data-value="title">Titre</li>
+          <ul id="sort-options" class="options hidden" role="listbox">
+            <li data-value="popularity" class="active" role="option">
+              Popularité
+            </li>
+            <li data-value="date" role="option">Date</li>
+            <li data-value="title" role="option">Titre</li>
           </ul>
         </div>
       </div>

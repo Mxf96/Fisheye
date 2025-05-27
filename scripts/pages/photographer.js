@@ -232,26 +232,37 @@ const sortOptions = document.getElementById("sort-options");
 
 // Gère l'affichage du menu déroulant de tri
 sortToggle.addEventListener("click", () => {
-  sortOptions.classList.toggle("hidden");
+  const isHidden = sortOptions.classList.toggle("hidden");
+  sortToggle.setAttribute("aria-expanded", !isHidden);
 });
 
-// Ajoute les événements pour chaque option de tri
+// Sélectionne toutes les options du menu de tri (li) et leur ajoute des comportements
 document.querySelectorAll("#sort-options li").forEach((item) => {
+  // Rends chaque option accessible au clavier (focusable)
+  item.setAttribute("tabindex", "0");
+
+  // Événement clic sur une option de tri
   item.addEventListener("click", (e) => {
     const selected = e.target;
-    const sortBy = selected.dataset.value;
+    const sortBy = selected.dataset.value; // Récupère la valeur du tri : popularity, date ou title
 
-    // Met à jour le bouton de tri avec l'option sélectionnée
+    // Met à jour le bouton principal avec le label sélectionné
     sortToggle.innerHTML = `${selected.textContent} <span class="arrow">▾</span>`;
+
+    // Supprime la classe active de toutes les options puis l'ajoute à l'option sélectionnée
     document
       .querySelectorAll("#sort-options li")
       .forEach((li) => li.classList.remove("active"));
     selected.classList.add("active");
-    sortOptions.classList.add("hidden");
 
-    // Trie les médias en fonction de l'option sélectionnée
+    // Ferme le menu de tri visuellement et pour les lecteurs d'écran
+    sortOptions.classList.add("hidden");
+    sortToggle.setAttribute("aria-expanded", "false");
+
+    // Copie le tableau d'origine pour ne pas le modifier directement
     let sortedMedias = [...medias];
 
+    // Applique le tri selon le critère sélectionné
     if (sortBy === "popularity") {
       sortedMedias.sort((a, b) => b.likes - a.likes);
     } else if (sortBy === "date") {
@@ -260,10 +271,32 @@ document.querySelectorAll("#sort-options li").forEach((item) => {
       sortedMedias.sort((a, b) => a.title.localeCompare(b.title));
     }
 
-    // Rafraîchit l'affichage des médias avec le nouveau tri
+    // Supprime l'ancienne galerie, réinitialise le total des likes et réaffiche les médias triés
     document.querySelector(".media-section")?.remove();
     totalLikes = 0;
     displayMedia(sortedMedias, folder);
     updateTotalLikesDisplay();
+  });
+
+  // Gère les interactions clavier sur les options
+  item.addEventListener("keydown", (e) => {
+    const items = Array.from(document.querySelectorAll("#sort-options li"));
+    const currentIndex = items.indexOf(e.target);
+
+    // Flèche bas : focus sur l'option suivante (boucle circulaire)
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const next = items[(currentIndex + 1) % items.length];
+      next.focus();
+    } // Flèche haut : focus sur l'option précédente (boucle circulaire)
+    else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const prev = items[(currentIndex - 1 + items.length) % items.length];
+      prev.focus();
+    } // Touche Enter : active l’élément sélectionné comme un clic
+    else if (e.key === "Enter") {
+      e.preventDefault();
+      e.target.click(); // Simule un clic clavier
+    }
   });
 });
