@@ -61,6 +61,7 @@
 /* Contact Button */
 .contact_button {
   align-self: flex-start;
+  margin-top: 80px;
   padding: 20px 40px;
   font-size: 16px;
   background: #901c1c;
@@ -79,6 +80,8 @@
   border-radius: 5px;
   background: #db8876;
   width: 50%;
+  max-height: 90vh;
+  overflow-y: auto;
   padding: 35px;
   margin: 10px auto;
 }
@@ -86,6 +89,7 @@
 .modal header {
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 30px;
 }
 
 .modal header img {
@@ -93,9 +97,12 @@
 }
 
 .modal header h2 {
-  font-size: 64px;
+  font-size: 50px;
   font-weight: normal;
-  text-align: center;
+}
+
+.modal header h2 span {
+  font-size: 50px;
 }
 
 form {
@@ -379,3 +386,5 @@ form div {
     transform: translateY(0);
   }
 }
+
+

@@ -102,6 +102,9 @@ export function createPhotographerHeader(photographer) {
   );
   img.setAttribute("alt", ""); // Décoratif
 
+  // Remplit le nom dans la modale
+  document.getElementById("photographer-name-modal").textContent = photographer.name;
+
   // Ajout de tous les éléments dans le header
   header.appendChild(info);
   header.appendChild(button);
