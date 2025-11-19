@@ -2,27 +2,39 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
+    <!-- Titre de la page du photographe -->
     <title>Fisheye - photographe</title>
+
+    <!-- Icône du site -->
     <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+    <!-- Import de la police DM Sans -->
     <link
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Feuille de styles principale -->
     <link href="css/style.css" rel="stylesheet" type="text/css" />
   </head>
+
   <body>
     <header>
+      <!-- Logo renvoyant vers la page d'accueil -->
       <a href="./index.html">
         <img src="./assets/images/logo.png" class="logo" alt="Fisheye Home" />
       </a>
     </header>
 
     <main id="main">
+      <!-- En-tête dynamique contenant les informations du photographe -->
       <div class="photograph-header"></div>
 
+      <!-- Conteneur du menu de tri des médias -->
       <div class="sort-container">
         <label for="sort-toggle">Trier par</label>
 
+        <!-- Menu personnalisé pour choisir un critère de tri -->
         <div class="custom-dropdown" role="listbox" aria-label="Menu de tri">
           <button
             id="sort-toggle"
@@ -30,9 +42,11 @@
             aria-haspopup="listbox"
             aria-expanded="false"
           >
+            <!-- Option sélectionnée par défaut -->
             Popularité <span class="arrow">▾</span>
           </button>
 
+          <!-- Liste d'options pour trier les médias -->
           <ul id="sort-options" class="options hidden" role="listbox">
             <li data-value="popularity" class="active" role="option">
               Popularité
@@ -44,19 +58,29 @@
       </div>
     </main>
 
+    <!-- Lightbox : affichage en grand des images/vidéos -->
     <div id="lightbox" class="lightbox hidden">
       <button class="lightbox-close">&times;</button>
       <button class="lightbox-prev">&#10094;</button>
+
+      <!-- Image affichée dans la lightbox -->
       <img class="lightbox-image" src="" alt="" />
+
+      <!-- Vidéo affichée dans la lightbox -->
       <video class="lightbox-video" controls class="hidden"></video>
+
+      <!-- Titre du média affiché -->
       <p class="lightbox-title"></p>
+
       <button class="lightbox-next">&#10095;</button>
     </div>
 
+    <!-- Fenêtre modale du formulaire de contact -->
     <div id="contact_modal" class="hidden">
       <div class="modal">
         <header>
           <h2>Contactez-moi<br /><span></span></h2>
+          <!-- Bouton pour fermer la modale -->
           <img
             src="assets/icons/close.svg"
             onclick="closeModal()"
@@ -64,6 +88,7 @@
           />
         </header>
 
+        <!-- Formulaire de contact -->
         <form>
           <div>
             <label for="prenom">Prénom</label>
@@ -85,11 +110,13 @@
             <textarea id="message" rows="5" required></textarea>
           </div>
 
+          <!-- Bouton pour envoyer le message -->
           <button class="contact_button" type="submit">Envoyer</button>
         </form>
       </div>
     </div>
 
+    <!-- Script JS principal pour la page photographe -->
     <script src="./scripts/pages/photographer.js" type="module"></script>
   </body>
 </html>

@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
+    <!-- Feuille de styles principale du site -->
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+    <!-- Encodage des caractères -->
     <meta charset="utf-8" />
+
+    <!-- Icône du site (favicon) -->
     <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+    <!-- Importation de la police DM Sans depuis Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Titre affiché dans l'onglet du navigateur -->
     <title>Fisheye</title>
   </head>
+
   <body>
     <header>
-      <a href="./index.html"
-        ><img src="./assets/images/logo.png" class="logo" alt="logo-Fisheye"
-      /></a>
+      <!-- Logo renvoyant vers la page d'accueil -->
+      <a href="./index.html">
+        <img src="./assets/images/logo.png" class="logo" alt="logo-Fisheye" />
+      </a>
+
+      <!-- Titre principal de la page d'accueil -->
       <h1>Nos photographes</h1>
     </header>
 
     <main id="main">
+      <!-- Section où seront injectées dynamiquement les cartes des photographes -->
       <div class="photographer_section"></div>
     </main>
 
+    <!-- Script template générant le HTML des photographes -->
     <script src="./scripts/templates/photographer.js" type="module"></script>
+
+    <!-- Script principal de la page d'accueil (chargement des données, affichage, etc.) -->
     <script src="./scripts/pages/index.js" type="module"></script>
   </body>
 </html>
